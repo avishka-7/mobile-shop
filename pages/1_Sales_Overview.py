@@ -7,8 +7,18 @@ st.set_page_config(page_title="Sales Overview", layout="wide")
 # ---------- LOAD DATA ----------
 df = pd.read_csv("mobile_sales.csv")
 
-# Convert Date column to datetime
-df["Date"] = pd.to_datetime(df["Date"])
+# Clean column names (removes hidden spaces)
+df.columns = df.columns.str.strip()
+
+# Check for date column safely
+if "Date" in df.columns:
+    df["Date"] = pd.to_datetime(df["Date"])
+elif "date" in df.columns:
+    df["date"] = pd.to_datetime(df["date"])
+    df.rename(columns={"date": "Date"}, inplace=True)
+else:
+    st.error("❌ Date column not found in dataset")
+    st.stop()
 
 st.title("📊 Sales Overview Dashboard")
 
@@ -65,3 +75,4 @@ st.pyplot(fig)
 # ---------- DATA TABLE ----------
 with st.expander("📋 View Filtered Sales Data"):
     st.dataframe(filtered_df)
+
