@@ -10,15 +10,30 @@ df = pd.read_csv("mobile_sales.csv")
 # Clean column names (removes hidden spaces)
 df.columns = df.columns.str.strip()
 
-# Check for date column safely
+# ---------- DATE COLUMN HANDLING ----------
+df.columns = df.columns.str.strip()
+
 if "Date" in df.columns:
-    df["Date"] = pd.to_datetime(df["Date"])
+    df["Date"] = pd.to_datetime(
+        df["Date"],
+        format="%d-%m-%Y",
+        errors="coerce"
+    )
+
 elif "date" in df.columns:
-    df["date"] = pd.to_datetime(df["date"])
+    df["date"] = pd.to_datetime(
+        df["date"],
+        format="%d-%m-%Y",
+        errors="coerce"
+    )
     df.rename(columns={"date": "Date"}, inplace=True)
+
 else:
     st.error("❌ Date column not found in dataset")
     st.stop()
+
+# Drop invalid dates
+df = df.dropna(subset=["Date"])
 
 st.title("📊 Sales Overview Dashboard")
 
@@ -75,4 +90,5 @@ st.pyplot(fig)
 # ---------- DATA TABLE ----------
 with st.expander("📋 View Filtered Sales Data"):
     st.dataframe(filtered_df)
+
 
