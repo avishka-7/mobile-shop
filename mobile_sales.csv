@@ -1,0 +1,89 @@
+Date,Customer_Name,Mobile_Model,Price,Payment_Mode
+02-01-2024,Aarav,Samsung Galaxy S23,72000,UPI
+03-01-2024,Ananya,Redmi Note 12,18000,Cash
+04-01-2024,Rohan,iPhone 14,65000,Card
+05-01-2024,Neha,Realme 11 Pro,23000,UPI
+06-01-2024,Vikram,OnePlus Nord CE,30000,UPI
+07-01-2024,Priya,Samsung Galaxy A14,14000,Cash
+08-01-2024,Arjun,Redmi Note 12,18000,Card
+09-01-2024,Kiran,iPhone 13,60000,UPI
+10-01-2024,Sneha,Realme 11 Pro,23000,Cash
+11-01-2024,Rahul,Samsung Galaxy S23,72000,Card
+12-01-2024,Mehul,OnePlus Nord CE,30000,UPI
+13-01-2024,Pooja,Redmi 10,12000,Cash
+14-01-2024,Sahil,iPhone 14,65000,UPI
+15-01-2024,Nikita,Samsung Galaxy A14,14000,UPI
+16-01-2024,Amit,Realme 11 Pro,23000,Card
+17-01-2024,Ritu,Redmi Note 12,18000,UPI
+18-01-2024,Manish,Samsung Galaxy S23,72000,UPI
+19-01-2024,Kavya,OnePlus Nord CE,30000,Cash
+20-01-2024,Deepak,iPhone 13,60000,Card
+21-01-2024,Suman,Redmi 10,12000,UPI
+22-01-2024,Raj,Samsung Galaxy A14,14000,Cash
+23-01-2024,Tina,Realme 11 Pro,23000,UPI
+24-01-2024,Varun,Redmi Note 12,18000,Card
+25-01-2024,Alok,OnePlus Nord CE,30000,UPI
+26-01-2024,Nidhi,iPhone 14,65000,UPI
+27-01-2024,Suresh,Samsung Galaxy S23,72000,Card
+28-01-2024,Isha,Redmi 10,12000,Cash
+29-01-2024,Kunal,Realme 11 Pro,23000,UPI
+30-01-2024,Payal,Samsung Galaxy A14,14000,Card
+01-02-2024,Ramesh,Redmi Note 12,18000,UPI
+02-02-2024,Aditi,iPhone 13,60000,Cash
+03-02-2024,Mohit,OnePlus Nord CE,30000,UPI
+04-02-2024,Sonia,Realme 11 Pro,23000,Card
+05-02-2024,Harsh,Samsung Galaxy S23,72000,UPI
+06-02-2024,Pankaj,Redmi 10,12000,Cash
+07-02-2024,Divya,iPhone 14,65000,Card
+08-02-2024,Naveen,Samsung Galaxy A14,14000,UPI
+09-02-2024,Riya,Realme 11 Pro,23000,UPI
+10-02-2024,Ashish,Redmi Note 12,18000,Card
+11-02-2024,Tarun,OnePlus Nord CE,30000,UPI
+12-02-2024,Sakshi,iPhone 13,60000,UPI
+13-02-2024,Gaurav,Samsung Galaxy S23,72000,Card
+14-02-2024,Preeti,Redmi 10,12000,Cash
+15-02-2024,Yogesh,Realme 11 Pro,23000,UPI
+16-02-2024,Komal,Samsung Galaxy A14,14000,Card
+17-02-2024,Shubham,Redmi Note 12,18000,UPI
+18-02-2024,Akanksha,iPhone 14,65000,UPI
+19-02-2024,Nitin,OnePlus Nord CE,30000,Card
+20-02-2024,Rashmi,Realme 11 Pro,23000,UPI
+21-02-2024,Suraj,Samsung Galaxy S23,72000,Cash
+22-02-2024,Monika,Redmi 10,12000,UPI
+23-02-2024,Keshav,iPhone 13,60000,Card
+24-02-2024,Pallavi,Samsung Galaxy A14,14000,UPI
+25-02-2024,Rajat,Realme 11 Pro,23000,Cash
+26-02-2024,Tanuj,Redmi Note 12,18000,UPI
+27-02-2024,Simran,OnePlus Nord CE,30000,Card
+28-02-2024,Abhishek,iPhone 14,65000,UPI
+01-03-2024,Juhi,Samsung Galaxy S23,72000,UPI
+02-03-2024,Arvind,Redmi 10,12000,Cash
+03-03-2024,Namrata,Realme 11 Pro,23000,UPI
+04-03-2024,Vivek,Samsung Galaxy A14,14000,Card
+05-03-2024,Sheetal,Redmi Note 12,18000,UPI
+06-03-2024,Kartik,iPhone 13,60000,UPI
+07-03-2024,Reema,OnePlus Nord CE,30000,Card
+08-03-2024,Sanjay,Realme 11 Pro,23000,UPI
+09-03-2024,Priyank,Samsung Galaxy S23,72000,UPI
+10-03-2024,Ayesha,Redmi 10,12000,Cash
+11-03-2024,Rohini,iPhone 14,65000,UPI
+12-03-2024,Dev,Samsung Galaxy A14,14000,Card
+13-03-2024,Irfan,Realme 11 Pro,23000,UPI
+14-03-2024,Lata,Redmi Note 12,18000,Card
+15-03-2024,Omkar,OnePlus Nord CE,30000,UPI
+16-03-2024,Minal,iPhone 13,60000,UPI
+17-03-2024,Ajay,Samsung Galaxy S23,72000,Card
+18-03-2024,Kriti,Redmi 10,12000,Cash
+19-03-2024,Parth,Realme 11 Pro,23000,UPI
+20-03-2024,Ankit,Samsung Galaxy A14,14000,UPI
+21-03-2024,Poonam,Redmi Note 12,18000,Card
+22-03-2024,Shrey,iPhone 14,65000,UPI
+23-03-2024,Bhavya,OnePlus Nord CE,30000,Cash
+24-03-2024,Niharika,Realme 11 Pro,23000,UPI
+25-03-2024,Ritesh,Samsung Galaxy S23,72000,UPI
+26-03-2024,Chirag,Redmi 10,12000,Cash
+27-03-2024,Sonal,iPhone 13,60000,Card
+28-03-2024,Mayur,Samsung Galaxy A14,14000,UPI
+29-03-2024,Apoorva,Realme 11 Pro,23000,UPI
+30-03-2024,Dinesh,Redmi Note 12,18000,Card
+31-03-2024,Swati,OnePlus Nord CE,30000,UPI
