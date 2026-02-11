@@ -77,10 +77,10 @@ for model in sales_df["Mobile_Model"].unique():
     model_data = sales_df[sales_df["Mobile_Model"] == model]
 
     monthly_model_sales = (
-        model_data
-        .groupby("Month")
-        .size()
-    )
+    model_data
+    .groupby("Month")["Price"]
+    .sum()
+)
 
     if len(monthly_model_sales) >= 2:
 
@@ -118,4 +118,5 @@ prediction_df = pd.DataFrame(
 )
 
 st.dataframe(prediction_df)
+
 
