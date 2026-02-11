@@ -95,33 +95,29 @@ with colA:
 
 # ---- Stock Status Distribution ----
 with colB:
-    status_count = (
-        stock_df["Status"]
-        .value_counts()
-        .reset_index()
+
+    comparison_df = stock_df[["Mobile_Model", "Units_Sold", "Stock_Remaining"]]
+
+    fig_compare = px.bar(
+        comparison_df,
+        x="Mobile_Model",
+        y=["Units_Sold", "Stock_Remaining"],
+        barmode="group",
+        title="Sales vs Remaining Stock Comparison"
     )
 
-    status_count.columns = ["Status", "Count"]
-
-    fig_status = px.pie(
-        status_count,
-        names="Status",
-        values="Count",
-        hole=0.5,
-        title="Stock Sufficient Distribution"
-    )
-
-    fig_status.update_layout(
+    fig_compare.update_layout(
         template="plotly_dark",
-        height=400
+        height=400,
+        xaxis_title="Mobile Model",
+        yaxis_title="Units"
     )
 
-    st.plotly_chart(fig_status, use_container_width=True)
-
-st.markdown("---")
+    st.plotly_chart(fig_compare, use_container_width=True)
 
 # ---------------- TABLE ----------------
 st.markdown("Detailed Stock Table")
 
 st.dataframe(stock_df.sort_values("Stock_Remaining"))
+
 
