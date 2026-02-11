@@ -41,8 +41,9 @@ if submitted:
         }])
 
         try:
-            new_data.to_csv("sales.csv", mode="a", header=False, index=False)
+            new_data.to_csv("mobile_sales.csv", mode="a", header=False, index=False)
         except FileNotFoundError:
-            new_data.to_csv("sales.csv", index=False)
+            new_data.to_csv("mobile_sales.csv", index=False)
 
         st.success("Sale recorded successfully!")
+
