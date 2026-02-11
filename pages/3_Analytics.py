@@ -7,7 +7,7 @@ st.set_page_config(page_title="Analytics", layout="wide")
 st.title("Sales Analytics & Demand Prediction")
 
 # ---------- LOAD DATA ----------
-sales_df = pd.read_csv("sales.csv")
+sales_df = pd.read_csv("mobile_sales.csv")
 sales_df.columns = sales_df.columns.str.strip()
 
 sales_df["Date"] = pd.to_datetime(
@@ -118,3 +118,4 @@ prediction_df = pd.DataFrame(
 )
 
 st.dataframe(prediction_df)
+
