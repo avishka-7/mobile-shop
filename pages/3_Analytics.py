@@ -165,6 +165,7 @@ with colA:
 
 # ---- Revenue by Model ----
 with colB:
+
     revenue_model = (
         filtered_df
         .groupby("Mobile_Model")["Price"]
@@ -173,6 +174,18 @@ with colB:
     )
 
     if not revenue_model.empty:
+
+        # ---- Indian Format Function ----
+        def format_indian(value):
+            if value >= 10000000:
+                return f"{value/10000000:.1f}Cr"
+            elif value >= 100000:
+                return f"{value/100000:.1f}L"
+            elif value >= 1000:
+                return f"{value/1000:.1f}K"
+            else:
+                return f"{value}"
+
         fig2 = px.bar(
             revenue_model,
             x="Price",
@@ -180,15 +193,6 @@ with colB:
             orientation="h",
             title=f"{selected_brand} Revenue by Model"
         )
-def format_indian(value):
-    if value >= 10000000:
-        return f"₹ {value/10000000:.1f}Cr"
-    elif value >= 100000:
-        return f"₹ {value/100000:.1f}L"
-    elif value >= 1000:
-        return f"₹ {value/1000:.1f}K"
-    else:
-        return f"₹ {value}"
 
         fig2.update_layout(
             template="plotly_dark",
@@ -199,8 +203,8 @@ def format_indian(value):
             )
         )
 
-
         st.plotly_chart(fig2, use_container_width=True)
+
 
 # ---- Units Distribution ----
 st.markdown("###Model Distribution")
@@ -228,5 +232,6 @@ if not units_share.empty:
     )
 
     st.plotly_chart(fig3, use_container_width=True)
+
 
 
