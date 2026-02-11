@@ -108,7 +108,7 @@ with colB:
         names="Status",
         values="Count",
         hole=0.5,
-        title="Stock Sufficient" Distribution"
+        title="Stock Sufficient Distribution"
     )
 
     fig_status.update_layout(
@@ -124,3 +124,4 @@ st.markdown("---")
 st.markdown("Detailed Stock Table")
 
 st.dataframe(stock_df.sort_values("Stock_Remaining"))
+
