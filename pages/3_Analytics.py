@@ -4,7 +4,7 @@ import plotly.express as px
 
 st.set_page_config(page_title="Sales Analytics", layout="wide")
 
-st.title("📊 Sales Analytics Dashboard")
+st.title("Sales Analytics Dashboard")
 
 # ---------------- LOAD DATA ----------------
 sales_df = pd.read_csv("mobile_sales.csv")
@@ -41,20 +41,79 @@ sales_df["Brand"] = sales_df["Mobile_Model"].apply(extract_brand)
 
 
 # ---------------- BRAND FILTER ----------------
-st.sidebar.header("🔎 Filter")
+st.sidebar.header("Filter")
 
-brands = sales_df["Brand"].unique()
+brands = sales_df["Brand"].unique().tolist()
+brand_options = ["All Brands"] + brands
 
 selected_brand = st.sidebar.selectbox(
     "Select Brand",
-    brands
+    brand_options
 )
 
 # Apply Filter
-filtered_df = sales_df[sales_df["Brand"] == selected_brand]
+if selected_brand == "All Brands":
+    filtered_df = sales_df
+else:
+    filtered_df = sales_df[sales_df["Brand"] == selected_brand]
+
+# ---------------- OVERALL DASHBOARD ----------------
+if selected_brand == "All Brands":
+
+    st.markdown("##Overall Business Performance")
+
+    # Brand Revenue Comparison
+    brand_revenue = (
+        sales_df
+        .groupby("Brand")["Price"]
+        .sum()
+        .reset_index()
+    )
+
+    fig_brand = px.bar(
+        brand_revenue,
+        x="Brand",
+        y="Price",
+        title="Revenue by Brand",
+        color="Brand"
+    )
+
+    fig_brand.update_layout(
+        template="plotly_dark",
+        height=350
+    )
+
+    st.plotly_chart(fig_brand, use_container_width=True)
+
+    # Overall Monthly Trend
+    monthly_units = (
+        sales_df
+        .groupby(sales_df["Date"].dt.to_period("M"))
+        .size()
+        .reset_index(name="Units")
+    )
+
+    monthly_units["Date"] = monthly_units["Date"].astype(str)
+
+    fig_month = px.line(
+        monthly_units,
+        x="Date",
+        y="Units",
+        markers=True,
+        title="Overall Monthly Sales Trend"
+    )
+
+    fig_month.update_layout(
+        template="plotly_dark",
+        height=350
+    )
+
+    st.plotly_chart(fig_month, use_container_width=True)
+
+    st.stop()  # IMPORTANT: stops brand-specific charts below
 
 # ---------------- KPIs ----------------
-st.markdown("## 📌 Key Metrics")
+st.markdown("## Key Metrics")
 
 col1, col2, col3 = st.columns(3)
 
@@ -130,7 +189,7 @@ with colB:
         st.plotly_chart(fig2, use_container_width=True)
 
 # ---- Units Distribution ----
-st.markdown("### 🔵 Model Distribution")
+st.markdown("###Model Distribution")
 
 units_share = (
     filtered_df["Mobile_Model"]
@@ -155,3 +214,4 @@ if not units_share.empty:
     )
 
     st.plotly_chart(fig3, use_container_width=True)
+
