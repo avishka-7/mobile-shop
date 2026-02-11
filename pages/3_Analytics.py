@@ -4,7 +4,7 @@ import plotly.express as px
 
 st.set_page_config(page_title="Sales Analytics", layout="wide")
 
-st.title("Sales Analytics Dashboard")
+st.title("📊 Sales Analytics Dashboard")
 
 # ---------------- LOAD DATA ----------------
 sales_df = pd.read_csv("mobile_sales.csv")
@@ -18,37 +18,43 @@ sales_df["Date"] = pd.to_datetime(
 
 sales_df = sales_df.dropna(subset=["Date"])
 
-# ---------------- FILTERS ----------------
-st.sidebar.header("🔎 Filters")
+# -------- AUTO GENERATE BRAND COLUMN --------
+def extract_brand(model):
+    if "Samsung" in model:
+        return "Samsung"
+    elif "iPhone" in model:
+        return "Apple"
+    elif "Redmi" in model:
+        return "Redmi"
+    elif "Realme" in model:
+        return "Realme"
+    elif "OnePlus" in model:
+        return "OnePlus"
+    elif "Vivo" in model:
+        return "Vivo"
+    elif "Oppo" in model:
+        return "Oppo"
+    else:
+        return "Other"
 
-# Model Filter
-models = sales_df["Mobile_Model"].unique()
-selected_models = st.sidebar.multiselect(
-    "Select Model(s)",
-    models,
-    default=models
+sales_df["Brand"] = sales_df["Mobile_Model"].apply(extract_brand)
+
+
+# ---------------- BRAND FILTER ----------------
+st.sidebar.header("🔎 Filter")
+
+brands = sales_df["Brand"].unique()
+
+selected_brand = st.sidebar.selectbox(
+    "Select Brand",
+    brands
 )
 
-# Date Range Filter
-min_date = sales_df["Date"].min()
-max_date = sales_df["Date"].max()
-
-selected_dates = st.sidebar.date_input(
-    "Select Date Range",
-    [min_date, max_date],
-    min_value=min_date,
-    max_value=max_date
-)
-
-# Apply Filters
-filtered_df = sales_df[
-    (sales_df["Mobile_Model"].isin(selected_models)) &
-    (sales_df["Date"] >= pd.to_datetime(selected_dates[0])) &
-    (sales_df["Date"] <= pd.to_datetime(selected_dates[1]))
-]
+# Apply Filter
+filtered_df = sales_df[sales_df["Brand"] == selected_brand]
 
 # ---------------- KPIs ----------------
-st.markdown("## Key Metrics")
+st.markdown("## 📌 Key Metrics")
 
 col1, col2, col3 = st.columns(3)
 
@@ -64,9 +70,10 @@ with col3:
     else:
         st.metric("Avg Sale Value", "₹ 0")
 
-# ---------------- CHARTS ----------------
 st.markdown("---")
-st.markdown("## Sales Insights")
+
+# ---------------- CHARTS ----------------
+st.markdown("## 📊 Brand Performance")
 
 colA, colB = st.columns(2)
 
@@ -87,7 +94,7 @@ with colA:
             x="Date",
             y="Units",
             markers=True,
-            title="Monthly Sales Trend"
+            title=f"{selected_brand} Monthly Sales Trend"
         )
 
         fig1.update_layout(
@@ -112,7 +119,7 @@ with colB:
             x="Price",
             y="Mobile_Model",
             orientation="h",
-            title="Revenue by Model"
+            title=f"{selected_brand} Revenue by Model"
         )
 
         fig2.update_layout(
@@ -122,8 +129,8 @@ with colB:
 
         st.plotly_chart(fig2, use_container_width=True)
 
-# ---- Units Share Donut ----
-st.markdown("### Units Sold Distribution")
+# ---- Units Distribution ----
+st.markdown("### 🔵 Model Distribution")
 
 units_share = (
     filtered_df["Mobile_Model"]
@@ -139,7 +146,7 @@ if not units_share.empty:
         values="Units",
         names="Mobile_Model",
         hole=0.6,
-        title="Units Share"
+        title=f"{selected_brand} Units Share"
     )
 
     fig3.update_layout(
@@ -148,4 +155,3 @@ if not units_share.empty:
     )
 
     st.plotly_chart(fig3, use_container_width=True)
-
