@@ -46,4 +46,8 @@ if submitted:
             new_data.to_csv("mobile_sales.csv", index=False)
 
         st.success("Sale recorded successfully!")
+        st.write("Last 5 Records")
+        st.dataframe(pd.read_csv("mobile_sales.csv").tail())
+
+
 
