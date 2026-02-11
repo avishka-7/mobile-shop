@@ -31,23 +31,24 @@ col1.metric("Revenue", f"₹{int(total_revenue):,}")
 col2.metric("Sales", total_sales)
 col3.metric("Average Sale", f"₹{int(avg_sale):,}")
 
-# ---------------- MONTHLY REVENUE AREA CHART ----------------
-st.markdown("## 📈 Monthly Revenue Trend")
+# ---------------- Monthly Sales Trend ----------------
+st.markdown("## Monthly Sales Trend")
 
-monthly_revenue = (
+monthly_units = (
     sales_df
-    .groupby(sales_df["Date"].dt.to_period("M"))["Price"]
-    .sum()
+    .groupby(sales_df["Date"].dt.to_period("M"))
+    .size()
 )
 
-monthly_revenue.index = monthly_revenue.index.astype(str)
+monthly_units.index = monthly_units.index.astype(str)
 
-st.area_chart(monthly_revenue)
+st.line_chart(monthly_units)
 
-st.markdown("---")
 
 # ---------------- MODEL REVENUE BAR CHART ----------------
-st.markdown("## 📱 Revenue by Mobile Model")
+st.markdown("## Revenue by Model")
+
+import matplotlib.pyplot as plt
 
 model_revenue = (
     sales_df
@@ -56,25 +57,41 @@ model_revenue = (
     .sort_values()
 )
 
-st.bar_chart(model_revenue)
+fig, ax = plt.subplots(facecolor="none")
+ax.set_facecolor("none")
 
-st.markdown("---")
+ax.barh(model_revenue.index, model_revenue.values)
 
-# ---------------- PAYMENT MODE PIE CHART ----------------
-st.markdown("## 💳 Payment Distribution")
-
-payment_counts = sales_df["Payment_Mode"].value_counts()
-
-fig, ax = plt.subplots()
-ax.pie(payment_counts, labels=payment_counts.index, autopct="%1.1f%%")
-ax.set_title("Payment Mode Share")
+ax.tick_params(colors="white")
+ax.set_xlabel("Revenue", color="white")
+ax.set_ylabel("Mobile Model", color="white")
 
 st.pyplot(fig)
 
-st.markdown("---")
+
+# ---------------- Units Sold Share ( Donut Chart) ----------------
+st.markdown("## 🔵 Units Sold Share")
+
+units_sold = sales_df["Mobile_Model"].value_counts()
+
+fig2, ax2 = plt.subplots(facecolor="none")
+ax2.set_facecolor("none")
+
+wedges, texts, autotexts = ax2.pie(
+    units_sold,
+    labels=units_sold.index,
+    autopct="%1.1f%%",
+    startangle=90,
+    textprops={"color": "white"}
+)
+
+centre_circle = plt.Circle((0, 0), 0.70, fc='black')
+fig2.gca().add_artist(centre_circle)
+
+st.pyplot(fig2)
 
 # ---------------- DEMAND PREDICTION ----------------
-st.markdown("## 🤖 AI-Based Demand Forecast")
+st.markdown("## Next Month Sales Estimate")
 
 sales_df["Month"] = sales_df["Date"].dt.to_period("M")
 
@@ -84,44 +101,43 @@ for model in sales_df["Mobile_Model"].unique():
 
     model_data = sales_df[sales_df["Mobile_Model"] == model]
 
-    # Using monthly revenue for variation
-    monthly_model_revenue = (
+    monthly_sales = (
         model_data
-        .groupby("Month")["Price"]
-        .sum()
+        .groupby("Month")
+        .size()
     )
 
-    if len(monthly_model_revenue) >= 2:
+    if len(monthly_sales) >= 2:
 
-        moving_avg = monthly_model_revenue.tail(3).mean()
+        avg_sales = monthly_sales.tail(3).mean()
 
-        growth_rate = monthly_model_revenue.pct_change().mean()
+        predicted_units = round(avg_sales)
 
-        trend_forecast = monthly_model_revenue.iloc[-1] * (1 + growth_rate)
+        suggested_stock = round(predicted_units * 1.2)
 
-        hybrid_prediction = (0.6 * moving_avg) + (0.4 * trend_forecast)
-
-        predicted = round(max(hybrid_prediction, 0))
-
-        suggested_stock = round(predicted * 1.15)
+        if predicted_units >= 3:
+            action = "Increase Stock"
+        elif predicted_units == 2:
+            action = "Maintain Stock"
+        else:
+            action = "Low Demand"
 
         prediction_results.append([
             model,
-            round(moving_avg, 2),
-            round(growth_rate * 100, 2),
-            predicted,
-            suggested_stock
+            predicted_units,
+            suggested_stock,
+            action
         ])
 
 prediction_df = pd.DataFrame(
     prediction_results,
     columns=[
-        "Mobile_Model",
-        "Avg Monthly Revenue",
-        "Growth Rate (%)",
-        "Predicted Revenue Next Month",
-        "Suggested Stock Level"
+        "Mobile Model",
+        "Expected Sales Next Month",
+        "Recommended Stock",
+        "Suggestion"
     ]
 )
 
 st.dataframe(prediction_df, use_container_width=True)
+
