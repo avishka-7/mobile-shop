@@ -6,7 +6,7 @@ st.set_page_config(page_title="Stock Status", layout="wide")
 st.title("📦 Stock Status Overview")
 
 # ---------- LOAD DATA ----------
-sales_df = pd.read_csv("sales.csv")
+sales_df = pd.read_csv("mobile_sales.csv")
 inventory_df = pd.read_csv("inventory.csv")
 
 sales_df.columns = sales_df.columns.str.strip()
@@ -65,3 +65,4 @@ if not low_stock.empty:
     st.error(f"⚠️ {len(low_stock)} models are low in stock. Consider restocking.")
 else:
     st.success("All stock levels are Sufficient.")
+
