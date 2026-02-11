@@ -1,0 +1,70 @@
+Date,Customer_Name,Mobile_Model,Price,Payment_Mode
+02-01-2025,Aarav,Samsung Galaxy S23,72000,UPI
+03-01-2025,Ananya,Redmi 10,12000,Cash
+04-01-2025,Rohan,iPhone 14,65000,Card
+05-01-2025,Neha,OnePlus Nord CE,30000,UPI
+06-01-2025,Dev,Samsung Galaxy A14,14000,UPI
+03-02-2025,Priya,Samsung Galaxy S23,72000,Card
+05-02-2025,Arjun,Redmi 10,12000,UPI
+07-02-2025,Simran,Redmi Note 12,18000,Cash
+09-02-2025,Kabir,iPhone 14,65000,UPI
+11-02-2025,Isha,iPhone 15,75000,Card
+13-02-2025,Vikram,OnePlus Nord CE,30000,UPI
+03-03-2025,Raj,Samsung Galaxy S23,72000,UPI
+05-03-2025,Tanya,Samsung Galaxy S24,82000,Cash
+07-03-2025,Manav,Redmi 10,12000,Card
+09-03-2025,Siya,Redmi 13C,11000,UPI
+11-03-2025,Aditi,iPhone 15,75000,Card
+13-03-2025,Varun,OnePlus 11R,42000,UPI
+02-04-2025,Alisha,Samsung Galaxy A14,14000,UPI
+04-04-2025,Kunal,Samsung Galaxy S23,72000,Card
+06-04-2025,Pooja,Redmi Note 12,18000,UPI
+08-04-2025,Ritika,iPhone 14,65000,Cash
+10-04-2025,Arnav,OnePlus Nord CE,30000,Card
+03-05-2025,Meera,Samsung Galaxy S23,72000,UPI
+05-05-2025,Harsh,Samsung Galaxy S24,82000,Card
+07-05-2025,Divya,Redmi 10,12000,Cash
+09-05-2025,Om,Redmi Note 12,18000,UPI
+11-05-2025,Myra,iPhone 15,75000,Card
+02-06-2025,Kriti,Samsung Galaxy S24,82000,UPI
+04-06-2025,Rudra,Samsung Galaxy S23,72000,Card
+06-06-2025,Aman,Redmi 13C,11000,UPI
+08-06-2025,Navya,iPhone 14,65000,Card
+10-06-2025,Reyansh,OnePlus 11R,42000,UPI
+03-07-2025,Ira,Samsung Galaxy S24,82000,UPI
+05-07-2025,Krish,Samsung Galaxy S23,72000,Card
+07-07-2025,Ayaan,Redmi 10,12000,UPI
+09-07-2025,Sara,Redmi Note 12,18000,Cash
+11-07-2025,Kiara,iPhone 15,75000,Card
+02-08-2025,Atharv,Samsung Galaxy S24,82000,UPI
+04-08-2025,Rhea,Samsung Galaxy A14,14000,Card
+06-08-2025,Parth,Redmi 13C,11000,UPI
+08-08-2025,Vihaan,iPhone 17,88000,Card
+10-08-2025,Kashvi,OnePlus Nord CE,30000,UPI
+03-09-2025,Siya,Samsung Galaxy S24,82000,UPI
+05-09-2025,Aditya,Samsung Galaxy S23,72000,Card
+07-09-2025,Aarohi,Redmi 10,12000,UPI
+09-09-2025,Om,iPhone 17,88000,Card
+11-09-2025,Trisha,OnePlus 11R,42000,UPI
+20-09-2025,Ronia,iPhone 17,80000,Card
+20-09-2025,Prithvi,iPhone 17,100000,Card
+20-09-2025,Tina,iPhone 17,150000,Card
+20-09-2025,Sachin,iPhone 17,80000,Card
+02-10-2025,Reva,Samsung Galaxy S24,82000,UPI
+03-10-2025,Ashwin,Samsung Galaxy S24,82000,Card
+04-10-2025,Kabir,Samsung Galaxy S23,72000,UPI
+06-10-2025,Nikita,Redmi Note 12,18000,Cash
+08-10-2025,Manav,Redmi 13C,11000,UPI
+10-10-2025,Isha,iPhone 17,88000,Card
+12-10-2025,Kunal,iPhone 15,75000,UPI
+03-11-2025,Aman,Samsung Galaxy S24,82000,UPI
+05-11-2025,Divya,Samsung Galaxy S23,72000,Card
+07-11-2025,Ritika,Redmi 10,12000,UPI
+09-11-2025,Arjun,iPhone 17,88000,Cash
+11-11-2025,Meera,iPhone 15,75000,UPI
+02-12-2025,Harsh,Samsung Galaxy S24,82000,UPI
+04-12-2025,Pooja,Samsung Galaxy S23,72000,Card
+06-12-2025,Aarav,Redmi 13C,11000,UPI
+08-12-2025,Ananya,iPhone 17,88000,Card
+10-12-2025,Rohan,OnePlus 11R,42000,Cash
+
