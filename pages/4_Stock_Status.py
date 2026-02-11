@@ -1,18 +1,19 @@
 import streamlit as st
 import pandas as pd
+import plotly.express as px
 
 st.set_page_config(page_title="Stock Status", layout="wide")
 
-st.title("📦 Stock Status Overview")
+st.title("Inventory & Stock Intelligence")
 
-# ---------- LOAD DATA ----------
+# ---------------- LOAD DATA ----------------
 sales_df = pd.read_csv("mobile_sales.csv")
 inventory_df = pd.read_csv("inventory.csv")
 
 sales_df.columns = sales_df.columns.str.strip()
 inventory_df.columns = inventory_df.columns.str.strip()
 
-# Convert date
+# ---------------- CLEAN DATE ----------------
 sales_df["Date"] = pd.to_datetime(
     sales_df["Date"],
     format="%d-%m-%Y",
@@ -21,48 +22,105 @@ sales_df["Date"] = pd.to_datetime(
 
 sales_df = sales_df.dropna(subset=["Date"])
 
-# ---------- SALES PER MODEL ----------
-sales_count = sales_df["Mobile_Model"].value_counts().reset_index()
-sales_count.columns = ["Mobile_Model", "Units_Sold"]
+# ---------------- CALCULATE UNITS SOLD ----------------
+units_sold = (
+    sales_df
+    .groupby("Mobile_Model")
+    .size()
+    .reset_index(name="Units_Sold")
+)
 
-# ---------- MERGE ----------
-merged_df = pd.merge(
+# Merge with inventory
+stock_df = pd.merge(
     inventory_df,
-    sales_count,
+    units_sold,
     on="Mobile_Model",
     how="left"
 )
 
-merged_df["Units_Sold"] = merged_df["Units_Sold"].fillna(0)
+stock_df["Units_Sold"] = stock_df["Units_Sold"].fillna(0)
+stock_df["Stock_Remaining"] = stock_df["Current_Stock"] - stock_df["Units_Sold"]
 
-# ---------- STOCK DIFFERENCE ----------
-merged_df["Stock_Remaining"] = (
-    merged_df["Current_Stock"] - merged_df["Units_Sold"]
-)
-
-# ---------- STATUS CLASSIFICATION ----------
-def classify(row):
-    if row["Stock_Remaining"] < 5:
-        return "🔴 Low Stock"
+# ---------------- STOCK STATUS LOGIC ----------------
+def stock_status(row):
+    if row["Stock_Remaining"] <= 5:
+        return "🔴 Low"
     elif row["Stock_Remaining"] <= 15:
         return "🟡 Moderate"
     else:
         return "🟢 Sufficient"
 
-merged_df["Status"] = merged_df.apply(classify, axis=1)
+stock_df["Status"] = stock_df.apply(stock_status, axis=1)
 
-# ---------- DISPLAY ----------
-st.subheader("Inventory vs Sales")
+# ---------------- KPIs ----------------
+st.markdown("Stock Overview")
 
-st.dataframe(merged_df)
+col1, col2, col3 = st.columns(3)
+
+total_models = len(stock_df)
+low_stock_models = len(stock_df[stock_df["Status"] == "🔴 Low"])
+total_stock_value = stock_df["Stock_Remaining"].sum()
+
+with col1:
+    st.metric("Total Models", total_models)
+
+with col2:
+    st.metric("Low Stock Alerts", low_stock_models)
+
+with col3:
+    st.metric("Total Units Remaining", int(total_stock_value))
 
 st.markdown("---")
 
-# ---------- SUMMARY ----------
-low_stock = merged_df[merged_df["Status"] == "🔴 Low Stock"]
+# ---------------- CHARTS ----------------
+colA, colB = st.columns(2)
 
-if not low_stock.empty:
-    st.error(f"⚠️ {len(low_stock)} models are low in stock. Consider restocking.")
-else:
-    st.success("All stock levels are Sufficient.")
+# ---- Stock Remaining Chart ----
+with colA:
+    fig_stock = px.bar(
+        stock_df,
+        x="Stock_Remaining",
+        y="Mobile_Model",
+        orientation="h",
+        color="Status",
+        title="Stock Remaining by Model"
+    )
 
+    fig_stock.update_layout(
+        template="plotly_dark",
+        height=400
+    )
+
+    st.plotly_chart(fig_stock, use_container_width=True)
+
+# ---- Stock Status Distribution ----
+with colB:
+    status_count = (
+        stock_df["Status"]
+        .value_counts()
+        .reset_index()
+    )
+
+    status_count.columns = ["Status", "Count"]
+
+    fig_status = px.pie(
+        status_count,
+        names="Status",
+        values="Count",
+        hole=0.5,
+        title="Stock Sufficient" Distribution"
+    )
+
+    fig_status.update_layout(
+        template="plotly_dark",
+        height=400
+    )
+
+    st.plotly_chart(fig_status, use_container_width=True)
+
+st.markdown("---")
+
+# ---------------- TABLE ----------------
+st.markdown("Detailed Stock Table")
+
+st.dataframe(stock_df.sort_values("Stock_Remaining"))
