@@ -2,7 +2,6 @@ import streamlit as st
 
 st.set_page_config(
     page_title="Mobile Shop System",
-    page_icon="📱",
     layout="wide"
 )
 
@@ -53,7 +52,7 @@ st.markdown("""
 # ---------- HERO SECTION ----------
 st.markdown("""
 <div class="overlay">
-    <div class="title">📱 Mobile Retail Management System</div>
+    <div class="title"> Mobile Retail Management System</div>
     <div class="subtitle">
         Smart Sales Analytics & Inventory Intelligence for Modern Retailers
     </div>
