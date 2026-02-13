@@ -5,11 +5,6 @@ st.set_page_config(
     layout="wide"
 )
 
-# ---------------- CUSTOM SIDEBAR ----------------
-st.sidebar.markdown("## 📱 MRMS")
-st.sidebar.markdown("### Navigation")
-st.sidebar.markdown("---")
-
 # ---------------- CUSTOM STYLING ----------------
 st.markdown("""
 <style>
@@ -65,7 +60,7 @@ st.markdown("""
 # ---------------- HERO SECTION ----------------
 st.markdown("""
 <div class="hero">
-    <h1>📱 Mobile Retail Management System</h1>
+    <h1> Mobile Retail Management System</h1>
     <p>Smart Sales Analytics & Inventory Intelligence for Modern Retailers</p>
 </div>
 """, unsafe_allow_html=True)
@@ -99,17 +94,10 @@ with col3:
 
 st.markdown("---")
 
-st.markdown(
-"""
-### 🚀 Why This System?
 
-✔ Real-time Sales Tracking  
-✔ Automated Inventory Monitoring  
-✔ Brand-wise Performance Analysis  
-✔ Data-driven Decision Making  
-✔ Simple & User Friendly Interface  
 
 Use the sidebar to navigate through the system.
 """
 )
+
 
