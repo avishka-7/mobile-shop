@@ -1,89 +1,115 @@
 import streamlit as st
 
 st.set_page_config(
-    page_title="Mobile Shop System",
+    page_title="Mobile Retail System",
     layout="wide"
 )
 
-# ---------- BACKGROUND IMAGE ----------
+# ---------------- CUSTOM SIDEBAR ----------------
+st.sidebar.markdown("## 📱 MRMS")
+st.sidebar.markdown("### Navigation")
+st.sidebar.markdown("---")
+
+# ---------------- CUSTOM STYLING ----------------
 st.markdown("""
 <style>
+
 .stApp {
-    background-image: url("https://images.unsplash.com/photo-1510552776732-01acc0a61d1e");
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
+    background-color: #0e1117;
 }
 
-.overlay {
-    background-color: rgba(0, 0, 0, 0.75);
-    padding: 80px;
+/* Hero Section */
+.hero {
+    background: linear-gradient(135deg, #1f2937, #111827);
+    padding: 60px;
     border-radius: 20px;
     text-align: center;
+    margin-bottom: 40px;
+}
+
+.hero h1 {
+    font-size: 48px;
     color: white;
 }
 
-.title {
-    font-size: 48px;
-    font-weight: bold;
-}
-
-.subtitle {
+.hero p {
     font-size: 20px;
-    margin-top: 10px;
-    opacity: 0.9;
+    color: #d1d5db;
 }
 
-.feature-box {
-    background-color: rgba(255,255,255,0.08);
-    padding: 25px;
-    border-radius: 15px;
+/* Feature Cards */
+.card {
+    background-color: #1f2937;
+    padding: 30px;
+    border-radius: 18px;
     text-align: center;
     transition: 0.3s;
 }
 
-.feature-box:hover {
-    background-color: rgba(255,255,255,0.15);
-    transform: scale(1.03);
+.card:hover {
+    background-color: #2d3748;
+    transform: translateY(-5px);
 }
+
+.card h3 {
+    color: white;
+}
+
+.card p {
+    color: #cbd5e1;
+}
+
 </style>
 """, unsafe_allow_html=True)
 
-# ---------- HERO SECTION ----------
+# ---------------- HERO SECTION ----------------
 st.markdown("""
-<div class="overlay">
-    <div class="title"> Mobile Retail Management System</div>
-    <div class="subtitle">
-        Smart Sales Analytics & Inventory Intelligence for Modern Retailers
-    </div>
+<div class="hero">
+    <h1>📱 Mobile Retail Management System</h1>
+    <p>Smart Sales Analytics & Inventory Intelligence for Modern Retailers</p>
 </div>
 """, unsafe_allow_html=True)
 
-st.write("")
-
-# ---------- FEATURES ----------
+# ---------------- FEATURE SECTION ----------------
 col1, col2, col3 = st.columns(3)
 
 with col1:
     st.markdown("""
-    <div class="feature-box">
+    <div class="card">
         <h3>➕ Add Sales</h3>
-        <p>Record daily mobile transactions easily.</p>
+        <p>Record daily mobile transactions quickly and accurately.</p>
     </div>
     """, unsafe_allow_html=True)
 
 with col2:
     st.markdown("""
-    <div class="feature-box">
+    <div class="card">
         <h3>📦 Manage Inventory</h3>
-        <p>Track stock and avoid shortage risks.</p>
+        <p>Track stock levels and avoid shortage or overstock risks.</p>
     </div>
     """, unsafe_allow_html=True)
 
 with col3:
     st.markdown("""
-    <div class="feature-box">
+    <div class="card">
         <h3>📊 Analytics</h3>
-        <p>Understand sales trends and brand performance.</p>
+        <p>Understand sales trends, brand performance & revenue insights.</p>
     </div>
     """, unsafe_allow_html=True)
+
+st.markdown("---")
+
+st.markdown(
+"""
+### 🚀 Why This System?
+
+✔ Real-time Sales Tracking  
+✔ Automated Inventory Monitoring  
+✔ Brand-wise Performance Analysis  
+✔ Data-driven Decision Making  
+✔ Simple & User Friendly Interface  
+
+Use the sidebar to navigate through the system.
+"""
+)
+
